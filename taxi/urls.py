@@ -14,7 +14,6 @@ from taxi.views import (
     ManufacturerUpdateView,
     ManufacturerDeleteView,
     DriverCreateView,
-    DriverUpdateView,
     DriverDeleteView,
     DriverLicenseUpdateView,
     add_driver,
@@ -56,7 +55,6 @@ urlpatterns = [
         "drivers/<int:pk>/", DriverDetailView.as_view(), name="driver-detail"
     ),
     path("drivers/create/", DriverCreateView.as_view(), name="driver-create"),
-    path("drivers/<int:pk>/update/", DriverUpdateView.as_view()),
     path(
         "drivers/<int:pk>/delete/",
         DriverDeleteView.as_view(),

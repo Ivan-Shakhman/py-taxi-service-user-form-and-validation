@@ -21,7 +21,6 @@
         <td>{{ driver.first_name }}</td>
         <td>{{ driver.last_name }}</td>
         <td>{{ driver.license_number }}</td>
-        <td><a href="{% url 'taxi:driver-update' pk=driver.id %}">Update</a> </td>
       <td><a href="{% url 'taxi:driver-delete' pk=driver.id %}">Delete</a> </td>
       </tr>
     {% endfor %}
