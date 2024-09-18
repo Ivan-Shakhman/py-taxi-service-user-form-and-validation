@@ -4,23 +4,21 @@
   <h1>
     {{ car.model }}
   </h1>
-  {% if user.is_authenticated %}
-      {% if user not in car.drivers.all %}
-        <form action= "{% url 'taxi:add-driver' pk=car.id %}" method="post">
-        {% csrf_token %}
-        <input type="submit" value="add me to this car" class="btn btn-secondary link-to-page">
-        </form>
-      {% else %}
-        <form action= "{% url 'taxi:remove-driver' pk=car.id %}" method="post">
-        {% csrf_token %}
-        <input type="submit" value="remove me from this car" class="btn btn-danger">
-        </form>
-      {% endif %}
-      
-    {% endif %}
+  {% if car in user.cars.all %}
+    <form action="{% url 'taxi:add-remove-driver-for-car' pk=car.id %}" method="post">
+      {% csrf_token %}
+      <input type="submit" value="add me to this car" class="btn btn-secondary link-to-page">
+    </form>
+  {% else %}
+    <form action="{% url 'taxi:add-remove-driver-for-car' pk=car.id %}" method="post">
+      {% csrf_token %}
+      <input type="submit" value="remove me from this car" class="btn btn-danger">
+    </form>
+
+  {% endif %}
   <p>Manufacturer: ({{ car.manufacturer.name }}, {{ car.manufacturer.country }})</p>
   <h1>Drivers</h1>
-  
+
   <hr>
   <ul>
     {% for driver in car.drivers.all %}
@@ -28,10 +26,10 @@
     {% endfor %}
   </ul>
   <a href="{% url 'taxi:car-delete' pk=car.id %}" class="btn btn-danger link-to-page">
-      Delete
-    </a>
+    Delete
+  </a>
 
-    <a href="{% url 'taxi:car-update' pk=car.id %}" class="btn btn-secondary link-to-page">
-      Update
-    </a>
+  <a href="{% url 'taxi:car-update' pk=car.id %}" class="btn btn-secondary link-to-page">
+    Update
+  </a>
 {% endblock %}
