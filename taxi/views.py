@@ -73,7 +73,10 @@ class CarDetailView(LoginRequiredMixin, generic.DetailView):
         else:
             driver.cars.add(car)
 
-        return HttpResponseRedirect(reverse_lazy("taxi:car-detail", kwargs={"pk": car.id}))
+        return HttpResponseRedirect(
+            reverse_lazy("taxi:car-detail", kwargs={"pk": car.id})
+        )
+
 
 class CarCreateView(LoginRequiredMixin, generic.CreateView):
     model = Car
@@ -115,6 +118,3 @@ class DriverLicenseUpdateView(LoginRequiredMixin, generic.UpdateView):
 class DriverDetailView(LoginRequiredMixin, generic.DetailView):
     model = Driver
     queryset = Driver.objects.all().prefetch_related("cars__manufacturer")
-
-
-

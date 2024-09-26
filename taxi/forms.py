@@ -17,7 +17,7 @@ class DriverCreateForm(forms.ModelForm):
             ),
             RegexValidator(
                 regex=r"^[A-Z]{3}\d{5}$",
-                message="license number must contain 3 upper letters and 5 nums"
+                message="license must contain 3 upper letters and 5 nums"
             ),
 
         ]
