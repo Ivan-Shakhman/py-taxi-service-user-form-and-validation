@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.core.validators import MaxLengthValidator, RegexValidator
 from django.forms import ModelForm
+from pyexpat.errors import messages
 
 from taxi.models import Driver, Car
 
@@ -10,8 +11,15 @@ from taxi.models import Driver, Car
 class DriverCreateForm(forms.ModelForm):
     license_number = forms.CharField(
         validators=[
-            MaxLengthValidator(8),
-            RegexValidator(regex=r"^[A-Z]{3}\d{5}$")
+            MaxLengthValidator(
+                8,
+                message="length of license number must be equal to 8"
+            ),
+            RegexValidator(
+                regex=r"^[A-Z]{3}\d{5}$",
+                message="license number must contain 3 upper letters and 5 nums"
+            ),
+
         ]
     )
 
@@ -26,7 +34,7 @@ class DriverCreateForm(forms.ModelForm):
 
 
 class DriverLicenseUpdateForm(DriverCreateForm):
-    class Meta(UserCreationForm.Meta):
+    class Meta:
         model = Driver
         fields = ("license_number",)
 
