@@ -7,10 +7,10 @@
     <form action="" method="post">
       {% csrf_token %}
     <input type="hidden" name="pk" value="{{ car.id }}">
-      <input type="submit" {% if car in user.cars.all %} 
-             value="add me to this car" class="btn btn-secondary link-to-page"
+      <input type="submit" {% if car in user.cars.all %}
+              value="remove me from this car" class="btn btn-danger link-to-page"
         {% else %}
-        value="remove me from this car" class="btn btn-danger"
+         value="add me to this car" class="btn btn-secondary link-to-page"
         {% endif %}>
     </form>
   <p>Manufacturer: ({{ car.manufacturer.name }}, {{ car.manufacturer.country }})</p>

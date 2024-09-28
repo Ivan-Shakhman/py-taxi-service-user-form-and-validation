@@ -6,13 +6,13 @@ from django.forms import ModelForm
 from pyexpat.errors import messages
 
 from taxi.models import Driver, Car
-
+LIMITED_LENGTH = 8
 
 class DriverCreateForm(forms.ModelForm):
     license_number = forms.CharField(
         validators=[
             MaxLengthValidator(
-                8,
+                LIMITED_LENGTH,
                 message="length of license number must be equal to 8"
             ),
             RegexValidator(
